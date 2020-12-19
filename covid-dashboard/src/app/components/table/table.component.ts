@@ -1,15 +1,48 @@
+import { TotalCases } from '../../models/total-cases.model';
+import { TotalCasesService } from '../../services/total-cases.service';
 import { Component, OnInit } from '@angular/core';
+
 
 @Component({
   selector: 'app-table',
   templateUrl: './table.component.html',
-  styleUrls: ['./table.component.scss']
+  styleUrls: ['./table.component.scss'],
+  providers: [TotalCasesService]
 })
 export class TableComponent implements OnInit {
 
-  constructor() { }
+  numberSwitcherStatus: boolean = false;
+  timeSwitcherStatus: boolean = false;
+  windowMode: boolean = false;
+  alignTabs: string = 'center';
+
+  totalCases: TotalCases[];
+  globalData: TotalCases;
+
+  displayedColumns: string[] = ['country', 'data']; 
+
+  constructor(private totalCasesService: TotalCasesService) { }
 
   ngOnInit(): void {
+    this.totalCasesService.getTotalCases().then((data: TotalCases[]) => {
+      this.totalCases = data;
+    });
+    this.totalCasesService.getGlobalData().then((data: TotalCases) => {
+      this.globalData = data;
+    });
   }
-
+  numbersSwitcher(): void {
+    this.numberSwitcherStatus = !this.numberSwitcherStatus
+  }
+  timeSwitcher(): void {
+    this.timeSwitcherStatus = !this.timeSwitcherStatus
+  }
+  windowModeSwitcher(): void {
+    this.windowMode = !this.windowMode
+    if (this.windowMode === false) {
+      this.alignTabs = 'center'
+    } else {
+      this.alignTabs = 'left'
+    }
+  }
 }
