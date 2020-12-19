@@ -40,5 +40,9 @@ export class GraphComponent implements OnInit {
         this.lineChartData[2].data.push(i.recovered);
       });
     });
+
+    this.timelineDataService.getCountryTimelineData("GB").then((data: TimelineData[]) => {
+      console.log(data);
+    });
   }
 }
