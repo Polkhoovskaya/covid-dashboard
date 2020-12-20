@@ -1,10 +1,9 @@
-import { TotalCases } from '../../models/total-cases.model';
-import { TotalCasesService } from '../../services/total-cases.service';
 import { Component, OnInit } from '@angular/core';
-
 import { FormControl } from '@angular/forms';
 import { Observable } from 'rxjs';
 import { map, startWith } from 'rxjs/operators';
+import { TotalCasesService } from 'src/app/services/TotalCasesService';
+import { TotalCases } from 'src/app/models/totalCases.model';
 
 @Component({
   selector: 'app-list',
