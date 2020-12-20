@@ -1,0 +1,70 @@
+@import '../../../../node_modules/mapbox-gl/dist/mapbox-gl.css';
+@import "~@angular/material/prebuilt-themes/indigo-pink.css";
+
+.map-block {
+  width: 900px;
+  margin: 50px auto;
+}
+
+.map-container {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  height: 500px;
+}
+
+#map {
+  width: 100%;
+  height: 100%;
+}
+
+.button-row {
+  position: absolute;
+  top: 10px;
+  left: 10px;
+  z-index: 99;
+
+  button {
+    margin-right: 10px;
+  }
+}
+
+.active {
+  background-color: #192a56;
+  color: #fff;
+}
+
+.marker {
+  height: 50px;
+  width: 50px;
+  cursor: pointer;
+}
+
+.mapboxgl-popup-content {
+  padding: 0;
+  border-radius: 5px;
+}
+
+.mat-typography h3,
+.mat-typography p {
+  margin: 0;
+}
+
+.popup-country {
+  background-color: #565857;
+  color: azure;
+  padding: 5px 10px;
+  margin: 0;
+  border-radius: 5px 5px 0 0;
+}
+
+.popup-totalInfo {
+  padding: 10px;
+}
+
+.popup-count {
+  font-size: 14px;
+  color: red;
+}
