@@ -2,6 +2,10 @@ import { TotalCases } from '../../models/total-cases.model';
 import { TotalCasesService } from '../../services/total-cases.service';
 import { Component, OnInit } from '@angular/core';
 
+import { FormControl } from '@angular/forms';
+import { Observable } from 'rxjs';
+import { map, startWith } from 'rxjs/operators';
+
 @Component({
   selector: 'app-list',
   templateUrl: './list.component.html',
@@ -11,6 +15,9 @@ import { Component, OnInit } from '@angular/core';
 export class ListComponent implements OnInit {
   totalCases: TotalCases[];
   globalData: TotalCases;
+
+  myControl = new FormControl();
+  filteredCountryOptions: Observable<TotalCases[]>;
 
   constructor(private totalCasesService: TotalCasesService) {
   }
@@ -22,5 +29,15 @@ export class ListComponent implements OnInit {
     this.totalCasesService.getGlobalData().then((data: TotalCases) => {
       this.globalData = data;
     });
+
+    this.filteredCountryOptions = this.myControl.valueChanges.pipe(
+      startWith(''),
+      map(value => value ? this._filter(value) : null)
+    );
+  }
+
+  private _filter(value: string): TotalCases[] {
+    const filterValue = value.toLowerCase();
+    return this.totalCases.filter(country => country.country.toLowerCase().indexOf(filterValue) === 0);
   }
 }
