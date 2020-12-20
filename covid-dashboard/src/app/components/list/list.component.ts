@@ -1,5 +1,5 @@
-import { TotalCases } from './../../models/totalCases.model';
-import { TotalCasesService } from './../../services/TotalCasesService';
+import { TotalCases } from '../../models/total-cases.model';
+import { TotalCasesService } from '../../services/total-cases.service';
 import { Component, OnInit } from '@angular/core';
 
 @Component({
