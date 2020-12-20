@@ -18,6 +18,7 @@ import { ListComponent } from './components/list/list.component';
 import { TableComponent } from './components/table/table.component';
 import { GlobalCasesComponent } from './components/global-cases/global-cases.component';
 import { FormsModule, ReactiveFormsModule } from "@angular/forms";
+import { MapComponent } from './components/map/map.component';
 
 @NgModule({
   declarations: [
@@ -28,7 +29,8 @@ import { FormsModule, ReactiveFormsModule } from "@angular/forms";
     SpinnerComponent,
     ListComponent,
     TableComponent,
-    ContentComponent
+    ContentComponent,
+    MapComponent
   ],
   imports: [
     BrowserModule,
