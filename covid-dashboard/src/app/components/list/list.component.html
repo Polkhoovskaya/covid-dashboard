@@ -16,7 +16,6 @@
   <mat-selection-list class="countries" #countries [multiple]="false">
     <mat-list-option class="country-item" *ngFor="let country of totalCases" [value]="country.country"
       (click)="onSelectCountry(countries.selectedOptions.selected[0]?.value)">
-
       <img src="{{country.flag}}" class="country-item__flag">
       <div mat-line>{{country.country}}</div>
       <div mat-line> {{country.totalConfirmed}} </div>
