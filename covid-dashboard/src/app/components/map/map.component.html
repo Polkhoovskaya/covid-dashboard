@@ -1,13 +1,25 @@
 <div class="map-block" [ngClass]="windowMode ? 'map-block--full' : ''">
-  <div class="window-mode" (click)="windowModeSwitcher()">
-    <div class="material-icons" *ngIf="windowMode === false; else reduceWindow">
-      fullscreen
+  <div class="map-elems">
+    <div class="map-item window-mode" (click)="windowModeSwitcher()">
+      <div class="material-icons" *ngIf="windowMode === false; else reduceWindow">
+        fullscreen
+      </div>
+      <ng-template #reduceWindow>
+        <span class="material-icons">
+          fullscreen_exit
+        </span>
+      </ng-template>
     </div>
-    <ng-template #reduceWindow>
-      <span class="material-icons">
-        fullscreen_exit
-      </span>
-    </ng-template>
+    <div class="map-item map-legengIcon" (click)="legendModeSwitcher()">
+      <div class="material-icons">
+        format_list_bulleted
+      </div>
+    </div>
+    <div class="map-legend" [ngClass]="showLegend ? '' : 'map-legend--hide'">
+      <h4 class="map-legend__title"></h4>
+      <div class="map-legend__list">
+      </div>
+    </div>
   </div>
   <div class="button-row">
     <button class="button active" mat-raised-button (click)="addMarkers('totalConfirmed')">Total Confirmed</button>

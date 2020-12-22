@@ -24,7 +24,7 @@ interface IGeoJson {
 
 interface ICollectionsGeoJSON {
   type: string;
-  features: Array<IGeoJson>
+  features: IGeoJson[];
 }
 
 @Component({
@@ -41,7 +41,10 @@ export class MapComponent implements OnInit {
   popup: Mapboxgl.Popup
   geoapifyKey: string = environment.geoapifyKey;
   mapTile: string = `https://maps.geoapify.com/v1/styles/dark-matter-yellow-roads/style.json?apiKey=${this.geoapifyKey}`;
+  wordTotalLength: number = 5; // needed to cut off a word "total"
   windowMode: boolean = false;
+  showLegend: boolean = false;
+  criterion: string = 'totalConfirmed';
 
   constructor(private totalCasesService: TotalCasesService) { }
 
@@ -58,8 +61,7 @@ export class MapComponent implements OnInit {
         center: [10, 30],
         zoom: 1
       });
-      this.loadMap('totalConfirmed');
-      this.addDisplayZoomControls();
+      this.loadMap(this.criterion);
     }, 100);
     this.toggleButtons();
   }
@@ -85,29 +87,36 @@ export class MapComponent implements OnInit {
     return geoJson;
   }
 
-  loadMap(criterion) {
+  loadMap(criterion): void {
     this.map.on('load', () => {
       this.map.addSource("places", {
         "type": "geojson",
         "data": this.geoJson
       });
       this.addMarkers(criterion);
-      this.map.addControl(new Mapboxgl.FullscreenControl());
+      this.map.addControl(new Mapboxgl.NavigationControl());
     });
   }
 
-  addMarkers(criterion) {
-    const mapboxMarker = Array.from(document.getElementsByClassName('mapboxgl-marker'));
+  addMarkers(criterion): void {
+    this.criterion = criterion;
+    const mapboxMarker: Element[] = Array.from(document.getElementsByClassName('mapboxgl-marker'));
     mapboxMarker.forEach((marker) => {
       marker.remove();
     });
-    enum Colors {
-      totalConfirmed = '23ff2c2c',
-      totalDeaths = '232c5eff',
-      totalRecovered = '2300a027'
+    enum geoColors {
+      totalConfirmed = '23ff2a2a',
+      totalDeaths = '232a53ff',
+      totalRecovered = '2300a105'
     }
+    enum Colors {
+      totalConfirmed = '#ff2a2a',
+      totalDeaths = '#2a53ff',
+      totalRecovered = '#00a105'
+    }
+    this.addLegend(this.criterion, Colors[this.criterion]);
     this.geoJson['features'].forEach((marker) => {
-      const el = this.setMarkerStyle(marker.properties[criterion], Colors[criterion]);
+      const el: HTMLDivElement = this.setMarkerStyle(marker.properties[criterion], geoColors[criterion]);
       new Mapboxgl.Marker(el)
         .setLngLat(marker.geometry.coordinates)
         .addTo(this.map);
@@ -123,8 +132,46 @@ export class MapComponent implements OnInit {
     })
   }
 
-  setMarkerStyle(amount: number, color: number) {
-    const markerTile = `https://api.geoapify.com/v1/icon/?type=circle&color=%${color}&iconType=awesome&apiKey=${this.geoapifyKey}`;
+  addLegend(criterion, color): void {
+    const legendTitle: Element = document.getElementsByClassName('map-legend__title')[0];
+    const legendList: Element = document.getElementsByClassName('map-legend__list')[0];
+    const circleColor = color;
+    legendList.innerHTML = '';
+    legendTitle.textContent = `Total ${criterion.slice(this.wordTotalLength)}`;
+
+    const legendLayers: string[] =
+      ['> 5,000,000',
+        '> 1,000,000 - 5,000,000',
+        '> 500,000 - 1,000,000',
+        '> 250,000 - 500,000',
+        '> 100,000 - 250,000',
+        '> 50,000 - 100,000',
+        '> 20,000 - 50,000',
+        '> 1 - 20,000'];
+
+    legendLayers.forEach((layer, i) => {
+      const div = document.createElement('div');
+      const span = document.createElement('span');
+      div.classList.add('map-legend__item');
+      div.insertAdjacentHTML('beforeend', `<div class="map-legend__circle"><span></span></div> ${legendLayers[i]}`);
+      legendList.appendChild(div);
+    });
+    this.setSizes(circleColor);
+  }
+
+  setSizes(color): void {
+    const legendSizes: number[] = [21, 18, 15, 12, 10, 8, 6, 4];
+    const legendItems: Element[] = Array.from(document.getElementsByClassName('map-legend__item'));
+
+    legendItems.forEach((item, i) => {
+      item.getElementsByTagName('span')[0].style.width = `${legendSizes[i]}px`;
+      item.getElementsByTagName('span')[0].style.height = `${legendSizes[i]}px`;
+      item.getElementsByTagName('span')[0].style.backgroundColor = color;
+    })
+  }
+
+  setMarkerStyle(amount: number, color: number): HTMLDivElement {
+    const markerTile: string = `https://api.geoapify.com/v1/icon/?type=circle&color=%${color}&iconType=awesome&apiKey=${this.geoapifyKey}`;
     let iconSize: number = 0;
     if (amount > 5000000) iconSize = 21;
     if (amount > 1000000 && amount < 5000000) iconSize = 18;
@@ -143,26 +190,21 @@ export class MapComponent implements OnInit {
     return icon;
   }
 
-  flyToCountry(currentFeature) {
+  flyToCountry(currentFeature: IGeoJson): void {
     this.map.flyTo({
       center: currentFeature.geometry.coordinates,
       zoom: 4.5
     });
   }
 
-  createPopUp(currentFeature, criterion) {
-    const wordTotalLength = 5;
+  createPopUp(currentFeature: IGeoJson, criterion: string): void {
     this.popup = new Mapboxgl.Popup({ closeOnClick: false, closeButton: false })
       .setLngLat(currentFeature.geometry.coordinates)
       .setHTML(`<h3 class="popup-country">${currentFeature.properties.country}</h3>
-                <p class="popup-totalInfo">Total ${criterion.slice(wordTotalLength)}: <span class="popup-count">${currentFeature.properties[criterion].toLocaleString()}</span></p> 
+                <p class="popup-totalInfo">Total ${criterion.slice(this.wordTotalLength)}: <span class="popup-count">${currentFeature.properties[criterion].toLocaleString()}</span></p> 
       
       `)
       .addTo(this.map);
-  }
-
-  addDisplayZoomControls() {
-    this.map.addControl(new Mapboxgl.NavigationControl());
   }
 
   toggleButtons(): void {
@@ -180,5 +222,9 @@ export class MapComponent implements OnInit {
     setTimeout(() => {
       this.map.resize();
     });
+  }
+
+  legendModeSwitcher(): void {
+    this.showLegend = !this.showLegend;
   }
 }
