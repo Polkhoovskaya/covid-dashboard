@@ -1,6 +1,6 @@
 import { TotalCases } from '../../models/totalCases.model';
 import { TotalCasesService } from '../../services/TotalCasesService';
-import { Component, OnInit, ViewEncapsulation, Input, SimpleChange } from '@angular/core';
+import { Component, OnInit, ViewEncapsulation, Input, SimpleChange, Output, EventEmitter } from '@angular/core';
 import { environment } from '../../../environments/environment';
 import * as Mapboxgl from 'mapbox-gl';
 
@@ -46,6 +46,7 @@ export class MapComponent implements OnInit {
   showLegend: boolean = false;
   criterion: string = 'totalConfirmed';
 
+  @Output() onClickCountry = new EventEmitter<string>();
   @Input() countryForMap: string;
 
   constructor(private totalCasesService: TotalCasesService) { }
@@ -54,6 +55,10 @@ export class MapComponent implements OnInit {
     if (changes.countryForMap.currentValue) {
       this.countryToJson(changes.countryForMap.currentValue);
     }
+  }
+
+  private onSelectCountry(country: string) {
+    this.onClickCountry.emit(country);
   }
 
   ngOnInit(): void {
@@ -136,6 +141,7 @@ export class MapComponent implements OnInit {
         .setLngLat(marker.geometry.coordinates)
         .addTo(this.map);
       el.addEventListener('click', (e) => {
+        this.onSelectCountry(marker.properties.country);
         this.flyToCountry(marker);
       })
       el.addEventListener('mouseenter', (e) => {
@@ -206,8 +212,6 @@ export class MapComponent implements OnInit {
   }
 
   flyToCountry(currentFeature: IGeoJson): void {
-    console.log(currentFeature);
-
     this.map.flyTo({
       center: currentFeature.geometry.coordinates,
       zoom: 4.5
