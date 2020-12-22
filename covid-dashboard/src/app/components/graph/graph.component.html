@@ -1,1 +1,10 @@
-<p>graph works!</p>
+<mat-card class="chart-card">
+  <h2>{{country ? country: "Total Cases"}}</h2>
+  <div>
+    <div style="display: block">
+      <canvas baseChart [datasets]="lineChartData" [labels]="lineChartLabels" [options]="lineChartOptions"
+        [legend]="lineChartLegend" [chartType]="lineChartType">
+      </canvas>
+    </div>
+  </div>
+</mat-card>

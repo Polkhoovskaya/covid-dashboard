@@ -1,4 +1,4 @@
-import { TotalCases } from '../models/total-cases.model';
+import { TotalCases } from './../models/totalCases.model';
 export class TotalCasesService {
 
   public async getTotalCases() {

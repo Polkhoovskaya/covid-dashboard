@@ -1,6 +1,24 @@
-<p>list works!</p>
-<!-- <a *ngFor="let i of totalCases">
-  <h1>{{i.country}}</h1>
-  <h2>{{i.date}}</h2>
-</a> -->
-<!-- <p>{{globalData.date}}</p> -->
+<mat-card class="list-form">
+
+  <form class="search-form">
+    <mat-form-field class="search-full-width">
+      <input type="text" placeholder="Pick one" aria-label="Number" matInput [formControl]="myControl"
+        [matAutocomplete]="auto" [(ngModel)]="countryName">
+      <mat-autocomplete autoActiveFirstOption #auto="matAutocomplete">
+        <mat-option class="search-input" *ngFor="let country of filteredCountryOptions | async"
+          [value]="country.country" (click)='onSelectCountry(countryName)'>
+          {{country.country}}
+        </mat-option>
+      </mat-autocomplete>
+    </mat-form-field>
+  </form>
+
+  <mat-selection-list class="countries" #countries [multiple]="false">
+    <mat-list-option class="country-item" *ngFor="let country of totalCases" [value]="country.country"
+      (click)="onSelectCountry(countries.selectedOptions.selected[0]?.value)">
+      <img src="{{country.flag}}" class="country-item__flag">
+      <div mat-line>{{country.country}}</div>
+      <div mat-line> {{country.totalConfirmed}} </div>
+    </mat-list-option>
+  </mat-selection-list>
+</mat-card>

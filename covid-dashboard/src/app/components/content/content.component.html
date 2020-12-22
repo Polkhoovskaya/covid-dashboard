@@ -1,7 +1,8 @@
 <div class="container">
-  <app-header></app-header>
-  <app-global-cases></app-global-cases>
-  <app-list></app-list>
-  <app-graph></app-graph>
-  <app-table></app-table>
+  <app-list [totalCases]='totalCases' [globalData]='globalData' [countryName]='curentCountry'
+    (onChooseCountry)='onSelectCountry($event)'></app-list>
+  <app-graph [country]='curentCountry'></app-graph>
+  <app-table [totalCases]='totalCases' [globalData]='globalData' [currentCountryInf]='currentCountryInformation'>
+  </app-table>
+  <app-map [countryForMap]='curentCountry' (onClickCountry)='onSelectCountry($event)'></app-map>
 </div>
