@@ -1,4 +1,4 @@
-import { Component, OnInit, Input, SimpleChanges } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
 import { TimelineData } from 'src/app/models/timelineData.model';
 import { TimelineDataService } from 'src/app/services/TimelineDataService';
 
@@ -42,14 +42,16 @@ export class GraphComponent implements OnInit {
     });
   }
 
-  ngOnChanges(changes: SimpleChanges) {
-    this.timelineDataService.getCountryTimelineData(this.country).then((data: TimelineData) => {
-      this.totalTimelineDate = data;
+  ngOnChanges() {
 
-      this.lineChartLabels = data.date;
-      this.lineChartData[0].data = data.confirmed;
-      this.lineChartData[1].data = data.deaths;
-      this.lineChartData[2].data = data.recovered;
-    });
+    this.country &&
+      this.timelineDataService.getCountryTimelineData(this.country).then((data: TimelineData) => {
+        this.totalTimelineDate = data;
+
+        this.lineChartLabels = data.date;
+        this.lineChartData[0].data = data.confirmed;
+        this.lineChartData[1].data = data.deaths;
+        this.lineChartData[2].data = data.recovered;
+      });
   }
 }
