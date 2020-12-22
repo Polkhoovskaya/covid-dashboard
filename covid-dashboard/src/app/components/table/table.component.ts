@@ -1,13 +1,12 @@
-import { TotalCases } from '../../models/total-cases.model';
-import { TotalCasesService } from '../../services/total-cases.service';
-import { Component, OnInit } from '@angular/core';
+
+import { Component, OnInit, Input } from '@angular/core';
+import { TotalCases } from 'src/app/models/totalCases.model';
 
 
 @Component({
   selector: 'app-table',
   templateUrl: './table.component.html',
-  styleUrls: ['./table.component.scss'],
-  providers: [TotalCasesService]
+  styleUrls: ['./table.component.scss']
 })
 export class TableComponent implements OnInit {
 
@@ -16,21 +15,15 @@ export class TableComponent implements OnInit {
   windowMode: boolean = false;
   alignTabs: string = 'center';
 
-  totalCases: TotalCases[];
-  globalData: TotalCases;
+  @Input() totalCases: TotalCases[];
+  @Input() globalData: TotalCases;
+  @Input() currentCountryInf: TotalCases;
 
-  displayedColumns: string[] = ['country', 'data']; 
+  displayedColumns: string[] = ['country', 'data'];
 
-  constructor(private totalCasesService: TotalCasesService) { }
+  constructor() { }
 
-  ngOnInit(): void {
-    this.totalCasesService.getTotalCases().then((data: TotalCases[]) => {
-      this.totalCases = data;
-    });
-    this.totalCasesService.getGlobalData().then((data: TotalCases) => {
-      this.globalData = data;
-    });
-  }
+  ngOnInit(): void { }
   numbersSwitcher(): void {
     this.numberSwitcherStatus = !this.numberSwitcherStatus
   }
