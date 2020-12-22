@@ -4,6 +4,8 @@ import { MatListModule } from '@angular/material/list';
 import { MatAutocompleteModule } from '@angular/material/autocomplete';
 import { MatInputModule } from '@angular/material/input';
 import { MatSelectModule } from '@angular/material/select';
+import { MatButtonModule } from '@angular/material/button';
+import { MatMenuModule } from '@angular/material/menu';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MatCardModule } from '@angular/material/card';
 import { AppComponent } from './app.component';
@@ -17,6 +19,7 @@ import { ListComponent } from './components/list/list.component';
 import { TableComponent } from './components/table/table.component';
 import { GlobalCasesComponent } from './components/global-cases/global-cases.component';
 import { FormsModule, ReactiveFormsModule } from "@angular/forms";
+import { MapComponent } from './components/map/map.component';
 
 @NgModule({
   declarations: [
@@ -26,7 +29,8 @@ import { FormsModule, ReactiveFormsModule } from "@angular/forms";
     GraphComponent,
     ListComponent,
     TableComponent,
-    ContentComponent
+    ContentComponent,
+    MapComponent
   ],
   imports: [
     BrowserModule,
@@ -40,7 +44,9 @@ import { FormsModule, ReactiveFormsModule } from "@angular/forms";
     MatInputModule,
     MatSelectModule,
     BrowserAnimationsModule,
-    MatCardModule
+    MatCardModule,
+    MatButtonModule,
+    MatMenuModule
   ],
   providers: [],
   bootstrap: [AppComponent]

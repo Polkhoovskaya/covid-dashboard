@@ -1,13 +1,24 @@
 /* You can add global styles to this file, and also import other style files */
 @import '~normalize.css';
-html{
+
+html {
   box-sizing: border-box;
 }
-*, *::after, *::before {
+
+*,
+*::after,
+*::before {
   box-sizing: inherit;
 }
-body { font-family: Roboto, "Helvetica Neue", sans-serif; }
+
+body {
+  font-family: Roboto, "Helvetica Neue", sans-serif;
+}
+
 .mat-tab-body {
   padding: 5px;
   height: 550px;
 }
+
+html, body { height: 100%; }
+body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
