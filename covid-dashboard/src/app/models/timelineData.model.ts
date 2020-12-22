@@ -1,10 +1,10 @@
 export class TimelineData {
-  public confirmed: string;
-  public deaths: string;
-  public recovered: string;
-  public date: number;
+  public confirmed: Array<number>;
+  public deaths: Array<number>;
+  public recovered: Array<number>;
+  public date: Array<string>;
 
-  constructor(confirmed: string, deaths: string, recovered: string, date: number) {
+  constructor(confirmed: Array<number>, deaths: Array<number>, recovered: Array<number>, date: Array<string>) {
     this.confirmed = confirmed;
     this.deaths = deaths;
     this.recovered = recovered;

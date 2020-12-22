@@ -1,4 +1,4 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Input, SimpleChanges } from '@angular/core';
 import { TimelineData } from 'src/app/models/timelineData.model';
 import { TimelineDataService } from 'src/app/services/TimelineDataService';
 
@@ -13,7 +13,7 @@ import { TimelineDataService } from 'src/app/services/TimelineDataService';
 export class GraphComponent implements OnInit {
   @Input() country: string;
 
-  totalTimelineDate: TimelineData[];
+  totalTimelineDate: TimelineData;
 
   constructor(private timelineDataService: TimelineDataService) { }
 
@@ -32,18 +32,24 @@ export class GraphComponent implements OnInit {
 
   ngOnInit(): void {
 
-    this.timelineDataService.getTotalTimelineData().then((data: TimelineData[]) => {
+    this.timelineDataService.getTotalTimelineData().then((data: TimelineData) => {
       this.totalTimelineDate = data;
-      this.totalTimelineDate.map(i => {
-        this.lineChartLabels.push(i.date);
-        this.lineChartData[0].data.push(i.confirmed);
-        this.lineChartData[1].data.push(i.deaths);
-        this.lineChartData[2].data.push(i.recovered);
-      });
-    });
 
-    this.timelineDataService.getCountryTimelineData("GB").then((data: TimelineData[]) => {
-      console.log(data);
+      this.lineChartLabels = data.date;
+      this.lineChartData[0].data = data.confirmed;
+      this.lineChartData[1].data = data.deaths;
+      this.lineChartData[2].data = data.recovered;
+    });
+  }
+
+  ngOnChanges(changes: SimpleChanges) {
+    this.timelineDataService.getCountryTimelineData(this.country).then((data: TimelineData) => {
+      this.totalTimelineDate = data;
+
+      this.lineChartLabels = data.date;
+      this.lineChartData[0].data = data.confirmed;
+      this.lineChartData[1].data = data.deaths;
+      this.lineChartData[2].data = data.recovered;
     });
   }
 }
