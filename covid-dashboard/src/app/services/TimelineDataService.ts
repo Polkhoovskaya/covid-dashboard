@@ -50,7 +50,6 @@ export class TimelineDataService {
     }).then(res => {
       let jsonData = res.substring(0, res.indexOf(']'));
       let jsonData2 = jsonData.substring(jsonData.indexOf('[') + 1, jsonData.length);
-      debugger;
       let jsonObj = JSON.parse('[' + jsonData2 + ']');
 
       let countryTimelineDate: TimelineData[] = jsonObj.filter(item => item.id === id).map(item => {

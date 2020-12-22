@@ -1,6 +1,6 @@
-import { TimelineData } from './../../models/timelineData.model';
-import { TimelineDataService } from './../../services/TimelineDataService';
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
+import { TimelineData } from 'src/app/models/timelineData.model';
+import { TimelineDataService } from 'src/app/services/TimelineDataService';
 
 
 @Component({
@@ -11,6 +11,7 @@ import { Component, OnInit } from '@angular/core';
 })
 
 export class GraphComponent implements OnInit {
+  @Input() country: string;
 
   totalTimelineDate: TimelineData[];
 

@@ -28,7 +28,7 @@
               "src/assets"
             ],
             "styles": [
-              "./node_modules/@angular/material/prebuilt-themes/deeppurple-amber.css",
+              "./node_modules/@angular/material/prebuilt-themes/indigo-pink.css",
               "src/styles.scss"
             ],
             "scripts": []
@@ -92,7 +92,7 @@
               "src/assets"
             ],
             "styles": [
-              "./node_modules/@angular/material/prebuilt-themes/deeppurple-amber.css",
+              "./node_modules/@angular/material/prebuilt-themes/indigo-pink.css",
               "src/styles.scss"
             ],
             "scripts": []
@@ -126,5 +126,8 @@
       }
     }
   },
-  "defaultProject": "covid-dashboard"
+  "defaultProject": "covid-dashboard",
+  "cli": {
+    "analytics": "00b31ed4-260e-4d71-b3be-2a8bf9ae880b"
+  }
 }
