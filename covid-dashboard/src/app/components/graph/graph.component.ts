@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
 
 @Component({
   selector: 'app-graph',
@@ -7,9 +7,10 @@ import { Component, OnInit } from '@angular/core';
 })
 export class GraphComponent implements OnInit {
 
+  @Input() country: string;
+
   constructor() { }
 
   ngOnInit(): void {
   }
-
 }

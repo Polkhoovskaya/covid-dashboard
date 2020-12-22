@@ -15,7 +15,6 @@ import { ContentComponent } from './components/content/content.component';
 import { HeaderComponent } from './components/header/header.component';
 
 import { GraphComponent } from './components/graph/graph.component';
-import { SpinnerComponent } from './components/spinner/spinner.component';
 import { ListComponent } from './components/list/list.component';
 import { TableComponent } from './components/table/table.component';
 import { GlobalCasesComponent } from './components/global-cases/global-cases.component';
@@ -28,7 +27,6 @@ import { MapComponent } from './components/map/map.component';
     HeaderComponent,
     GlobalCasesComponent,
     GraphComponent,
-    SpinnerComponent,
     ListComponent,
     TableComponent,
     ContentComponent,
