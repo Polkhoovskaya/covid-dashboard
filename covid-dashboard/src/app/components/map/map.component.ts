@@ -40,7 +40,8 @@ export class MapComponent implements OnInit {
   map: Mapboxgl.Map;
   popup: Mapboxgl.Popup
   geoapifyKey: string = environment.geoapifyKey;
-  mapTile = `https://maps.geoapify.com/v1/styles/dark-matter-yellow-roads/style.json?apiKey=${this.geoapifyKey}`;
+  mapTile: string = `https://maps.geoapify.com/v1/styles/dark-matter-yellow-roads/style.json?apiKey=${this.geoapifyKey}`;
+  windowMode: boolean = false;
 
   constructor(private totalCasesService: TotalCasesService) { }
 
@@ -55,7 +56,7 @@ export class MapComponent implements OnInit {
         container: 'map',
         style: this.mapTile,
         center: [10, 30],
-        zoom: 0.8
+        zoom: 1
       });
       this.loadMap('totalConfirmed');
       this.addDisplayZoomControls();
@@ -91,6 +92,7 @@ export class MapComponent implements OnInit {
         "data": this.geoJson
       });
       this.addMarkers(criterion);
+      this.map.addControl(new Mapboxgl.FullscreenControl());
     });
   }
 
@@ -163,7 +165,7 @@ export class MapComponent implements OnInit {
     this.map.addControl(new Mapboxgl.NavigationControl());
   }
 
-  toggleButtons() {
+  toggleButtons(): void {
     const buttons = Array.from(document.getElementsByClassName('button'));
     buttons.forEach((button) => {
       button.addEventListener('click', (e) => {
@@ -171,5 +173,12 @@ export class MapComponent implements OnInit {
         button.classList.add('active');
       })
     })
+  }
+
+  windowModeSwitcher(): void {
+    this.windowMode = !this.windowMode;
+    setTimeout(() => {
+      this.map.resize();
+    });
   }
 }

@@ -1,10 +1,18 @@
-<div class="map-block">
-  <div class="map-container">
-    <div class="button-row">
-      <button class="button active" mat-raised-button (click)="addMarkers('totalConfirmed')">Total Confirmed</button>
-      <button class="button" mat-raised-button (click)="addMarkers('totalDeaths')">Total Deaths</button>
-      <button class="button" mat-raised-button (click)="addMarkers('totalRecovered')">Total Recovered</button>
+<div class="map-block" [ngClass]="windowMode ? 'map-block--full' : ''">
+  <div class="window-mode" (click)="windowModeSwitcher()">
+    <div class="material-icons" *ngIf="windowMode === false; else reduceWindow">
+      fullscreen
     </div>
-    <div id="map"></div>
+    <ng-template #reduceWindow>
+      <span class="material-icons">
+        fullscreen_exit
+      </span>
+    </ng-template>
   </div>
+  <div class="button-row">
+    <button class="button active" mat-raised-button (click)="addMarkers('totalConfirmed')">Total Confirmed</button>
+    <button class="button" mat-raised-button (click)="addMarkers('totalDeaths')">Total Deaths</button>
+    <button class="button" mat-raised-button (click)="addMarkers('totalRecovered')">Total Recovered</button>
+  </div>
+  <div id="map"></div>
 </div>

@@ -2,17 +2,24 @@
 @import "~@angular/material/prebuilt-themes/indigo-pink.css";
 
 .map-block {
-  width: 900px;
-  margin: 50px auto;
-}
-
-.map-container {
   position: relative;
   display: flex;
   align-items: center;
   justify-content: center;
-  width: 100%;
+  width: 900px;
   height: 500px;
+  margin: 50px auto;
+
+  &--full {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    margin: 50px auto;
+    z-index: 2;
+    margin: 0;
+  }
 }
 
 #map {
@@ -24,7 +31,7 @@
   position: absolute;
   top: 10px;
   left: 10px;
-  z-index: 99;
+  z-index: 1;
 
   button {
     margin-right: 10px;
@@ -67,4 +74,31 @@
 .popup-count {
   font-size: 14px;
   color: red;
+}
+
+.window-mode {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: absolute;
+  margin: 10px 8px 0 0;
+  width: 30px;
+  height: 30px;
+  background-color: #fff;
+  border-radius: 100%;
+  top: 2px;
+  right: 2px;
+  box-shadow: 0px 0px 0px 2px#ebebeb;
+  cursor: pointer;
+  user-select: none;
+  transition: all .3s;
+  z-index: 2;
+
+  &:hover {
+    transform: rotate(45deg);
+  }
+}
+
+.mapboxgl-ctrl-top-right .mapboxgl-ctrl {
+  margin-top: 50px;
 }
