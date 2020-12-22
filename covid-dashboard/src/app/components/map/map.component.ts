@@ -1,6 +1,6 @@
 import { TotalCases } from '../../models/totalCases.model';
 import { TotalCasesService } from '../../services/TotalCasesService';
-import { Component, OnInit, ViewEncapsulation, } from '@angular/core';
+import { Component, OnInit, ViewEncapsulation, Input, SimpleChange } from '@angular/core';
 import { environment } from '../../../environments/environment';
 import * as Mapboxgl from 'mapbox-gl';
 
@@ -46,7 +46,15 @@ export class MapComponent implements OnInit {
   showLegend: boolean = false;
   criterion: string = 'totalConfirmed';
 
+  @Input() countryForMap: string;
+
   constructor(private totalCasesService: TotalCasesService) { }
+
+  ngOnChanges(changes) {
+    if (changes.countryForMap.currentValue) {
+      this.countryToJson(changes.countryForMap.currentValue);
+    }
+  }
 
   ngOnInit(): void {
     this.totalCasesService.getTotalCases().then((data: TotalCases[]) => {
@@ -64,6 +72,13 @@ export class MapComponent implements OnInit {
       this.loadMap(this.criterion);
     }, 100);
     this.toggleButtons();
+  }
+
+  countryToJson(country) {
+    const currentGeoObj = this.geoJson.features.filter((obj) => {
+      return obj.properties.country === country;
+    });
+    this.flyToCountry(currentGeoObj[0]);
   }
 
   createGeoJson(data): ICollectionsGeoJSON {
@@ -191,6 +206,8 @@ export class MapComponent implements OnInit {
   }
 
   flyToCountry(currentFeature: IGeoJson): void {
+    console.log(currentFeature);
+
     this.map.flyTo({
       center: currentFeature.geometry.coordinates,
       zoom: 4.5
