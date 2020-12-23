@@ -6,8 +6,16 @@
   justify-content: space-between;
 }
 .container {
+  height: 90vw;
+  width: 100%;
   display: flex;
   justify-content: center;
-  flex-direction: column;
   align-items: center;
+  app-map, app-list{
+    margin: 5px;
+  }
+}
+.graph-table{
+  width: 30%;
+  margin: 5px;
 }

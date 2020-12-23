@@ -3,10 +3,12 @@
   <div class="container">
     <app-list [totalCases]='totalCases' [globalData]='globalData' [countryName]='curentCountry'
       (onChooseCountry)='onSelectCountry($event)'></app-list>
-    <app-graph [country]='curentCountry'></app-graph>
-    <app-table [totalCases]='totalCases' [globalData]='globalData' [currentCountryInf]='currentCountryInformation'>
-    </app-table>
     <app-map [countryForMap]='curentCountry' (onClickCountry)='onSelectCountry($event)'></app-map>
+    <div class="graph-table">
+      <app-graph [country]='curentCountry'></app-graph>
+      <app-table [totalCases]='totalCases' [globalData]='globalData' [currentCountryInf]='currentCountryInformation'>
+      </app-table>
+    </div>
   </div>
   <app-footer></app-footer>
 </div>

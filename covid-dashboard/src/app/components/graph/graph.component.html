@@ -1,10 +1,20 @@
-<mat-card class="chart-card">
+<div class="chart-card" [ngClass]="windowMode ? 'chart-card--full' : ''">
+  <div class="window-mode" (click)="windowModeSwitcher()">
+    <div class="material-icons" *ngIf="windowMode === false; else reduceWindow">
+      fullscreen
+    </div>
+    <ng-template #reduceWindow>
+      <span class="material-icons">
+        fullscreen_exit
+      </span>
+    </ng-template>
+  </div>
   <h2>{{country ? country: "Total Cases"}}</h2>
-  <div>
+  <div class="graph">
     <div style="display: block">
       <canvas baseChart [datasets]="lineChartData" [labels]="lineChartLabels" [options]="lineChartOptions"
         [legend]="lineChartLegend" [chartType]="lineChartType">
       </canvas>
     </div>
   </div>
-</mat-card>
+</div>
