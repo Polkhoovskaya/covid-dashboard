@@ -1,0 +1,74 @@
+a{
+  text-decoration: none;
+}
+.footer{
+  min-height: 45px;
+  background-color: #3f51b5;
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  align-items: center;
+  padding: 0 100px;
+  font-size: 20px;
+  font-weight: 300;
+  position: relative;
+  user-select: none;
+  .authors-list{
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    font-weight: inherit;
+    line-height: 20px;
+    background: none;
+    color: #fff;
+    outline: none;
+    padding: 0;
+    border: none;
+    cursor: pointer;
+    transition: all .3s;
+    span {
+      margin-right: 5px;
+    }
+    &:hover{
+      box-shadow: 0 2px 0 #fff;
+    }
+  }
+  .rsschool{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+    transition: all .3s;
+    &:hover .info__img{
+      transform: scale(0.95);
+    }
+  }
+  .footer__info {
+    color: #fff;
+    margin: auto 0;
+  }
+  .info__img {
+    display: block;
+    transition: all .5s;
+  }
+}
+
+@media (max-width: 790px) {
+  .footer {
+    padding: 5px 10px;
+    justify-content: space-around;
+    flex-direction: column;
+    align-items: center;
+    .rsschool{
+      position: static;
+      transform: translateX(0%);
+      margin: 10px;
+    }
+    .footer__logo {
+      margin-bottom: 10px;
+    }
+  }
+}
