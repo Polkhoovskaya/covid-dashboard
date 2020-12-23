@@ -19,6 +19,7 @@ export class ListComponent implements OnInit {
 
   myControl = new FormControl();
   filteredCountryOptions: Observable<TotalCases[]>;
+  windowMode: boolean = false;
 
   constructor() {
   }
@@ -37,5 +38,9 @@ export class ListComponent implements OnInit {
 
   private onSelectCountry(country: string) {
     this.onChooseCountry.emit(country);
+  }
+
+  windowModeSwitcher(): void {
+    this.windowMode = !this.windowMode
   }
 }

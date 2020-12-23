@@ -31,11 +31,14 @@ export class TableComponent implements OnInit {
     this.timeSwitcherStatus = !this.timeSwitcherStatus
   }
   windowModeSwitcher(): void {
-    this.windowMode = !this.windowMode
+    this.windowMode = !this.windowMode;
     if (this.windowMode === false) {
       this.alignTabs = 'center'
     } else {
       this.alignTabs = 'left'
     }
+  }
+  backToTable(): void {
+    this.currentCountryInf = undefined;
   }
 }

@@ -14,6 +14,7 @@ export class GraphComponent implements OnInit {
   @Input() country: string;
 
   totalTimelineDate: TimelineData;
+  windowMode: boolean = false;
 
   constructor(private timelineDataService: TimelineDataService) { }
 
@@ -53,5 +54,9 @@ export class GraphComponent implements OnInit {
         this.lineChartData[1].data = data.deaths;
         this.lineChartData[2].data = data.recovered;
       });
+  }
+
+  windowModeSwitcher(): void {
+    this.windowMode = !this.windowMode
   }
 }
