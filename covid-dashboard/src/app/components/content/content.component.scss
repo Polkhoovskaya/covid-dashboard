@@ -1,21 +1,83 @@
 .content-wrapper{
   width: 100%;
-  height: 100%;
+  height: 100vh;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
 }
 .container {
-  height: 90vw;
-  width: 100%;
+  max-height: 85vh;
+  max-width: 100%;
   display: flex;
-  justify-content: center;
-  align-items: center;
+  justify-content: space-between;
+  margin: 10px 10px;
   app-map, app-list{
-    margin: 5px;
+    padding: 0px;
+  }
+  .list{
+    width: 10%;
+  }
+  .map {
+    width: 58%;
+  }
+  .graph-table{
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  width: 30%;
+  .graph{
+    height: 45%;
+  }
+  .table{
+    height: 53%;
   }
 }
-.graph-table{
-  width: 30%;
-  margin: 5px;
+}
+
+@media(max-width: 1570px) {
+  .container {
+    .list{
+      width: 16%;
+    }
+    .map {
+      width: 53%;
+    }
+    .graph-table{
+    display: flex;
+    flex-direction: column;
+    width: 30%;
+    padding: 0px;
+  }
+  }
+}
+@media(max-width: 1400px) {
+  .container {
+    .graph-table{
+    .graph{
+      height: 35%;
+    }
+    .table{
+      height: 63%;
+    }
+  }
+  }
+}
+@media(max-width: 1200px) {
+  .container {
+    .list{
+      width: 16%;
+    }
+    .map {
+      width: 47%;
+    }
+    .graph-table{
+      width: 35%;
+    .graph{
+      height: 35%;
+    }
+    .table{
+      height: 63%;
+    }
+  }
+  }
 }
