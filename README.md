@@ -20,3 +20,7 @@ https://github.com/rolling-scopes-school/tasks/blob/master/tasks/covid-dashboard
 # работа с сервисом TotalCasesService
 1. пример как достаются данные находится в компоненте **List**
 2. пример того, как отображать данные в html находится в той же компоненте закомиченый
+
+
+# хостинг
+https://covid-dashboard-ang.web.app/
