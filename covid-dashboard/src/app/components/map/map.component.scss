@@ -1,4 +1,4 @@
-@import '../../../../node_modules/mapbox-gl/dist/mapbox-gl.css';
+@import "../../../../node_modules/mapbox-gl/dist/mapbox-gl.css";
 @import "~@angular/material/prebuilt-themes/indigo-pink.css";
 
 .map-block {
@@ -6,19 +6,25 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  width: 900px;
-  height: 500px;
-  margin: 50px auto;
+  width: 100%;
+  height: 100%;
+  border-radius: 15px;
+  border: 2px solid #ebebeb;
+  background-color:  #ebebeb;
+  overflow: hidden;
+  box-shadow: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24);
 
   &--full {
     position: fixed;
     top: 0;
     left: 0;
-    width: 100vw;
-    height: 100vh;
+    width: 100%;
+    height: 100%;
     margin: 50px auto;
-    z-index: 2;
+    z-index: 4;
     margin: 0;
+    border-radius: 0;
+    border: none;
   }
 
   .map-elems {
@@ -39,7 +45,10 @@
       cursor: pointer;
       box-shadow: 0px 0px 0px 2px#ebebeb;
       user-select: none;
-      transition: all .3s;
+      transition: all 0.3s;
+      &:hover .material-icons{
+        transform: scale(0.9);
+      }
     }
 
     .window-mode {
@@ -115,11 +124,12 @@ li {
 
   button {
     margin-right: 10px;
+    border-radius: 10px;
   }
 }
 
 .active {
-  background-color: #192a56;
+  background-color: #3f51b5;
   color: #fff;
 }
 

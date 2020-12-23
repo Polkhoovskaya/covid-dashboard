@@ -1,7 +1,57 @@
 .chart-card {
-  width: 50vw;
-  // position: absolute;
-  // right: 5vw;
-  // bottom: 5vw;
-  margin-bottom: 2rem;
+  width: 100%;
+  height: 100%;
+  border-radius: 15px;
+  background: #ebebeb;
+  padding: 2px;
+  position: relative;
+  margin-bottom: 10px;
+  box-shadow: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24);
+  .window-mode {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: absolute;
+    width: 30px;
+    height: 30px;
+    background-color: #fff;
+    border-radius: 100%;
+    top: 2px;
+    right: 2px;
+    box-shadow: 0px 0px 0px 2px#ebebeb;
+    cursor: pointer;
+    user-select: none;
+    transition: all .3s;
+    z-index: 2;
+    &:hover{
+      transform: rotate(45deg);
+    }
+  }
+  h2 {
+    padding-top: 15px;
+    margin-bottom: 5px;
+    margin-left: 2px;
+  }
+  .graph {
+    background: #fff;
+    border-bottom-left-radius: 15px;
+    border-bottom-right-radius: 15px;
+  }
+}
+
+.chart-card.chart-card--full{
+  position: fixed;
+  margin: auto auto;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  width: 100%;
+  height: 100%;
+  border-radius: 0;
+  z-index: 4;
+  .window-mode {
+    top: 10px;
+    right: 5px;
+  }
 }

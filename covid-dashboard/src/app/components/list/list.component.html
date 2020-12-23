@@ -1,4 +1,14 @@
-<mat-card class="list-form">
+<div class="list-form" [ngClass]="windowMode ? 'list-form--full' : ''">
+  <div class="window-mode" (click)="windowModeSwitcher()">
+    <div class="material-icons" *ngIf="windowMode === false; else reduceWindow">
+      fullscreen
+    </div>
+    <ng-template #reduceWindow>
+      <span class="material-icons">
+        fullscreen_exit
+      </span>
+    </ng-template>
+  </div>
 
   <form class="search-form">
     <mat-form-field class="search-full-width">
@@ -21,4 +31,4 @@
       <div mat-line> {{country.totalConfirmed}} </div>
     </mat-list-option>
   </mat-selection-list>
-</mat-card>
+</div>

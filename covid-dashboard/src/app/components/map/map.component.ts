@@ -72,7 +72,7 @@ export class MapComponent implements OnInit {
         container: 'map',
         style: this.mapTile,
         center: [10, 30],
-        zoom: 1
+        zoom: 1.3
       });
       this.loadMap(this.criterion);
     }, 100);
