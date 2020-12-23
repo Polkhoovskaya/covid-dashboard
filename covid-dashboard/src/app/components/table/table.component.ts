@@ -31,8 +31,7 @@ export class TableComponent implements OnInit {
     this.timeSwitcherStatus = !this.timeSwitcherStatus
   }
   windowModeSwitcher(): void {
-    this.windowMode = !this.windowMode
-    console.log(this.currentCountryInf);
+    this.windowMode = !this.windowMode;
     if (this.windowMode === false) {
       this.alignTabs = 'center'
     } else {
