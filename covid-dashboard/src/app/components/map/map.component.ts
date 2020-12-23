@@ -1,6 +1,6 @@
 import { TotalCases } from '../../models/totalCases.model';
 import { TotalCasesService } from '../../services/TotalCasesService';
-import { Component, OnInit, ViewEncapsulation, Input, SimpleChange, Output, EventEmitter } from '@angular/core';
+import { Component, OnInit, ViewEncapsulation, Input, Output, EventEmitter } from '@angular/core';
 import { environment } from '../../../environments/environment';
 import * as Mapboxgl from 'mapbox-gl';
 
@@ -113,6 +113,7 @@ export class MapComponent implements OnInit {
         "type": "geojson",
         "data": this.geoJson
       });
+      this.map.resize();
       this.addMarkers(criterion);
       this.map.addControl(new Mapboxgl.NavigationControl());
     });
