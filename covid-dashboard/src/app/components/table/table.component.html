@@ -9,7 +9,38 @@
       </span>
     </ng-template>
   </div>
-  <div class="table__tabs">
+
+  <div class="table__current-country" *ngIf="this.currentCountryInf !== undefined; else selectedCountry">
+    <div class="current-country__space">
+      <div class="current-country__name"> {{ this.currentCountryInf.country }} </div>
+      <div class="current-country__field">
+        <div class="current-country__flag">
+          <img class="current-country__flag-img" src="{{this.currentCountryInf?.flag}}" class="country-item__flag" height="65px">
+        </div>
+        <div class="field-part">
+          <h3 class="field-part__header">Total</h3>
+          <ul class="field-part__ul">
+            <li class="field-part__li"> Confirmed: {{ this.currentCountryInf.totalConfirmed }}</li>
+            <li class="field-part__li"> Deaths: {{ this.currentCountryInf.totalDeaths }}</li>
+            <li class="field-part__li"> Recovered: {{ this.currentCountryInf.totalRecovered }}</li>
+          </ul>
+        </div>
+        <div class="field-part">
+          <h3 class="field-part__header">New</h3>
+          <ul class="field-part__ul">
+            <li class="field-part__li"> Confirmed: {{ this.currentCountryInf.newConfirmed }}</li>
+            <li class="field-part__li"> Deaths: {{ this.currentCountryInf.newDeaths }}</li>
+            <li class="field-part__li"> Recovered: {{ this.currentCountryInf.newRecovered }}</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+    <div class="back-to-table" (click)="backToTable()">
+      back to table
+    </div>
+  </div>
+  <ng-template #selectedCountry>
+    <div class="table__tabs">
     <mat-tab-group headerPosition="below" [attr.mat-align-tabs]="alignTabs">
       <mat-tab label="Total">
         <div class="table__wrapper">
@@ -253,4 +284,5 @@
       <div class="switcher__circle" [ngClass]="timeSwitcherStatus ? 'switcher__circle--active' : ''"></div>
     </div>
   </div>
+  </ng-template>
 </div>

@@ -32,10 +32,14 @@ export class TableComponent implements OnInit {
   }
   windowModeSwitcher(): void {
     this.windowMode = !this.windowMode
+    console.log(this.currentCountryInf);
     if (this.windowMode === false) {
       this.alignTabs = 'center'
     } else {
       this.alignTabs = 'left'
     }
+  }
+  backToTable(): void {
+    this.currentCountryInf = undefined;
   }
 }
