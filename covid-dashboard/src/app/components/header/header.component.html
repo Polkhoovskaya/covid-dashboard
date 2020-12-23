@@ -1,1 +1,11 @@
-<p>header works!</p>
+<header class="header">
+  <div class="header__logo">
+    <a class="logo__link" href="/">Covid-19 <span class="logo__span">dashboard</span>
+      <img class="logo__img" src="./assets/logo.svg" alt="logo" width="35" height="35">
+    </a>
+  </div>
+  <div class="header__global-cases">
+    <div class="global-cases__header">Global:</div>
+    <div class="global-cases__number"> {{ globalData?.totalConfirmed }}  cases</div>
+  </div>
+</header>
