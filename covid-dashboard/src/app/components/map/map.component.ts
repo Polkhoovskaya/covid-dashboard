@@ -222,8 +222,8 @@ export class MapComponent implements OnInit {
     this.popup = new Mapboxgl.Popup({ closeOnClick: false, closeButton: false })
       .setLngLat(currentFeature.geometry.coordinates)
       .setHTML(`<h3 class="popup-country">${currentFeature.properties.country}</h3>
-                <p class="popup-totalInfo">Total ${criterion.slice(this.wordTotalLength)}: <span class="popup-count">${currentFeature.properties[criterion].toLocaleString()}</span></p> 
-      
+                <p class="popup-totalInfo">Total ${criterion.slice(this.wordTotalLength)}: <span class="popup-count">${currentFeature.properties[criterion].toLocaleString()}</span></p>
+
       `)
       .addTo(this.map);
   }

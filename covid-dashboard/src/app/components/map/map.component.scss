@@ -1,4 +1,4 @@
-@import '../../../../node_modules/mapbox-gl/dist/mapbox-gl.css';
+@import "../../../../node_modules/mapbox-gl/dist/mapbox-gl.css";
 @import "~@angular/material/prebuilt-themes/indigo-pink.css";
 
 .map-block {
@@ -39,7 +39,7 @@
       cursor: pointer;
       box-shadow: 0px 0px 0px 2px#ebebeb;
       user-select: none;
-      transition: all .3s;
+      transition: all 0.3s;
     }
 
     .window-mode {
